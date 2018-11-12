@@ -1,12 +1,5 @@
 public with sharing class SecurityEnforcer {
     private enum ProcessType {READ, CREATE, EDIT, REMOVE}
-    private class ObjectNotAccessibleException extends Exception {}
-    private class FieldNotAccessibleException extends Exception{}
-    private class ObjectNotCreateableException extends Exception{}
-    private class FieldNotCreateableException extends Exception{}
-    private class ObjectNotUpdateableException extends Exception{}
-    private class FieldNotUpdateableException extends Exception{}
-    private class ObjectNotDeletableException extends Exception{}
     
     public static void validateCanAccess(SObject obj) {
         validateCanAccess(new List<SObject>{obj});    
@@ -65,16 +58,16 @@ public with sharing class SecurityEnforcer {
             Schema.DescribeSObjectResult objDescribe = obj.getSObjectType().getDescribe();
             
             if(ProcessType.READ.equals(pType) && !objDescribe.isAccessible()) {
-                throw new ObjectNotAccessibleException('Object API name: '+ objDescribe.getName());
+                throw new ObjectAccessException.NotAccessibleException('Object API name: '+ objDescribe.getName(), objDescribe.getName());
             }
             else if(ProcessType.CREATE.equals(pType) && !objDescribe.isCreateable()) {
-                throw new ObjectNotCreateableException('Object API name: ' + objDescribe.getName());
+                throw new ObjectAccessException.NotCreateableException('Object API name: ' + objDescribe.getName(), objDescribe.getName());
             }
             else if(ProcessType.REMOVE.equals(pType) && !objDescribe.isDeletable()) {
-                throw new ObjectNotDeletableException('Object API name: ' + objDescribe.getName());
+                throw new ObjectAccessException.NotDeletableException('Object API name: ' + objDescribe.getName(), objDescribe.getName());
             }
             else if(ProcessType.EDIT.equals(pType) && !objDescribe.isUpdateable()) {
-                throw new ObjectNotUpdateableException('Object API name: ' + objDescribe.getName());
+                throw new ObjectAccessException.NotUpdateableException('Object API name: ' + objDescribe.getName(), objDescribe.getName());
             }
             
             Map<String, Schema.SObjectField> fields = objDescribe.fields.getMap();
@@ -86,13 +79,13 @@ public with sharing class SecurityEnforcer {
                 DescribeFieldResult field = fields.get(fieldName).getDescribe();
                 
                 if(ProcessType.READ.equals(pType) && !field.isAccessible()) {
-                    throw new FieldNotAccessibleException('Object API name: ' + objDescribe.getName() + ' Field API name: ' + field.getName());
+                    throw new FieldAccessException.NotAccessibleException('Object API name: ' + objDescribe.getName() + ' Field API name: ' + field.getName(), objDescribe.getName(), field.getName());
                 }
                 else if(ProcessType.CREATE.equals(pType) && !field.isCreateable()) {
-                    throw new FieldNotCreateableException('Object API name: ' + objDescribe.getName() + ' Field API name: ' + field.getName());
+                    throw new FieldAccessException.NotCreateableException('Object API name: ' + objDescribe.getName() + ' Field API name: ' + field.getName(), objDescribe.getName(), field.getName());
                 }
                 else if(ProcessType.EDIT.equals(pType) && !field.isUpdateable() && field.isPermissionable()) {
-                    throw new FieldNotUpdateableException('Object API name: ' + objDescribe.getName() + ' Field API name: ' + field.getName());
+                    throw new FieldAccessException.NotUpdateableException('Object API name: ' + objDescribe.getName() + ' Field API name: ' + field.getName(), objDescribe.getName(), field.getName());
                 }
             }
         }        

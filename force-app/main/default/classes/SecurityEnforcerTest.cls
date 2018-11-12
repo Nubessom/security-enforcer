@@ -82,8 +82,9 @@ public class SecurityEnforcerTest {
         try {
             SecurityEnforcer.validateCanCreate(dummyObj);
         }
-        catch (SecurityEnforcer.ObjectNotCreateableException ex) {
+        catch (ObjectAccessException.NotCreateableException ex) {
             testPassed = true;
+            System.assertEquals('AsyncApexJob', ex.getObjectName());
         }
         System.assert(testPassed);    
     }
@@ -95,8 +96,9 @@ public class SecurityEnforcerTest {
         try {
             SecurityEnforcer.validateCanUpdate(dummyObj);
         }
-        catch (SecurityEnforcer.ObjectNotUpdateableException ex) {
+        catch (ObjectAccessException.NotUpdateableException ex) {
             testPassed = true;
+            System.assertEquals('AsyncApexJob', ex.getObjectName());
         }
         System.assert(testPassed);    
     }
@@ -108,8 +110,9 @@ public class SecurityEnforcerTest {
         try {
             SecurityEnforcer.validateCanDelete(dummyObj);
         }
-        catch (SecurityEnforcer.ObjectNotDeletableException ex) {
+        catch (ObjectAccessException.NotDeletableException ex) {
             testPassed = true;
+            System.assertEquals('AsyncApexJob', ex.getObjectName());
         }
         System.assert(testPassed);    
     }
