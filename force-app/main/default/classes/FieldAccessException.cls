@@ -1,23 +1,23 @@
-public abstract class FieldAccessException extends Exception {
+global abstract class FieldAccessException extends Exception {
     
-    public class NotAccessibleException extends FieldAccessException {
+    global class NotAccessibleException extends FieldAccessException {
         public NotAccessibleException(String message, String objectName, String fieldName) {
             super(message, objectName, fieldName);
         }
     }
-    public class NotCreateableException extends FieldAccessException {
+    global class NotCreateableException extends FieldAccessException {
         public NotCreateableException(String message, String objectName, String fieldName) {
             super(message, objectName, fieldName);
         }
     }
-    public class NotUpdateableException extends FieldAccessException {
+    global class NotUpdateableException extends FieldAccessException {
         public NotUpdateableException(String message, String objectName, String fieldName) {
             super(message, objectName, fieldName);
         }
     }
     
-    public String objectName;
-    public String fieldName;
+    private String objectName;
+    private String fieldName;
     
     // Exception class constructor     
     public FieldAccessException(String message, String objectName, String fieldName) {
@@ -28,11 +28,11 @@ public abstract class FieldAccessException extends Exception {
         this.fieldName = fieldName;
     }
     
-    public String getObjectName() {
+    global String getObjectName() {
         return objectName;
     }
     
-    public String getFieldName() {
+    global String getFieldName() {
         return fieldName;
     }
 }

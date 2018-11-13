@@ -1,35 +1,35 @@
-public with sharing class SecurityEnforcer {
+global with sharing class SecurityEnforcer {
     private enum ProcessType {READ, CREATE, EDIT, REMOVE}
     
-    public static void validateCanAccess(SObject obj) {
+    global static void validateCanAccess(SObject obj) {
         validateCanAccess(new List<SObject>{obj});    
     }
     
-    public static void validateCanCreate(SObject obj) {
+    global static void validateCanCreate(SObject obj) {
         validateCanCreate(new List<SObject>{obj});    
     }
     
-    public static void validateCanDelete(SObject obj) {
+    global static void validateCanDelete(SObject obj) {
         validateCanDelete(new List<SObject>{obj});    
     }
     
-    public static void validateCanUpdate(SObject obj) {
+    global static void validateCanUpdate(SObject obj) {
         validateCanUpdate(new List<SObject>{obj});    
     }
     
-    public static void validateCanAccess(List<SObject> objects) {
+    global static void validateCanAccess(List<SObject> objects) {
         validate(objects, ProcessType.READ);
     }
     
-    public static void validateCanCreate(List<SObject> objects) {
+    global static void validateCanCreate(List<SObject> objects) {
         validate(objects, ProcessType.CREATE);
     }
     
-    public static void validateCanDelete(List<SObject> objects) {
+    global static void validateCanDelete(List<SObject> objects) {
         validate(objects, ProcessType.REMOVE);
     }
     
-    public static void validateCanUpdate(List<SObject> objects) {
+    global static void validateCanUpdate(List<SObject> objects) {
         validate(objects, ProcessType.EDIT);
     }
     
