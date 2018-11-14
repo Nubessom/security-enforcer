@@ -1,6 +1,11 @@
 # SecurityEnforcer library
 Library for enforcing FLS and CRUD rules in Apex effortlessly
 
+<a href="https://githubsfdeploy.herokuapp.com">
+  <img alt="Deploy to Salesforce"
+       src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
+</a>
+
 ## Dev, Build and Test
 To use the library clone the repo and use sources from force-app/main/classes
 
@@ -51,7 +56,9 @@ ObjectAccessException.getObjectName(); - for object exception
 FieldAccessException.getObjectName(); - for field exception
 ```
 Field name access on exception:
+```
 FieldAccessException.getFieldName(); - for field exception
+```
 
 ## Todo
 upsert support
