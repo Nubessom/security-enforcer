@@ -1,4 +1,4 @@
-global abstract class ObjectAccessException extends Exception {
+global abstract with sharing class ObjectAccessException extends Exception {
     
     global class NotAccessibleException extends ObjectAccessException {
         public NotAccessibleException(String message, String objectName) {
