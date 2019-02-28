@@ -1,5 +1,5 @@
 @isTest
-public class ExceptionTest {
+public with sharing class ExceptionTest {
     @isTest
     public static void ObjectAccessExceptionAccessibleTest(){
         try
