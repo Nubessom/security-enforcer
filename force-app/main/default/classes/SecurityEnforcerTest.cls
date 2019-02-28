@@ -1,5 +1,5 @@
 @isTest
-public class SecurityEnforcerTest {
+public with sharing class SecurityEnforcerTest {
     
     @isTest 
     public static void createTest_Success() {
