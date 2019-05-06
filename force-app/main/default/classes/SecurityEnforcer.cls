@@ -8,6 +8,22 @@ global with sharing class SecurityEnforcer {
     global static void validateCanCreate(SObject obj) {
         validateCanCreate(new List<SObject>{obj});    
     }
+
+    global static void validateCanDelete(Id objId) {
+        validateCanDelete(new List<Id>{objId});    
+    }
+
+    global static void validateCanDelete(Set<Id> objIdSet) {
+        validateCanDelete(new List<Id>(objIdSet));    
+    }
+
+    global static void validateCanDelete(List<Id> objIdList) {
+        List<SObject> objList = new List<SObject>();
+        for(Id objId : objIdList) {
+            objList.add(objId.getSObjectType().newSObject());
+        }
+        validateCanDelete(objList);    
+    }
     
     global static void validateCanDelete(SObject obj) {
         validateCanDelete(new List<SObject>{obj});    
@@ -39,22 +55,12 @@ global with sharing class SecurityEnforcer {
 
         //Loop through all objects and get unique types and fields
         Map<Schema.SObjectType, Set<String>> objectToFieldMap = new Map<Schema.SObjectType, Set<String>>();
-        for(sObject obj : objects) {
-            if(obj == null)
-                continue;
-            
-            Schema.SObjectType objType = obj.getSObjectType();
-            if(objectToFieldMap.get(objType) == null)
-                objectToFieldMap.put(objType, new Set<String>());
-            
-            //Add all fields that are populated on this object
-            Map<String, Object> populatedFields = obj.getPopulatedFieldsAsMap();
-            objectToFieldMap.get(objType)
-                			.addAll(populatedFields.keySet());
+        for(SObject obj : objects) {
+            processSObjectTypeAndFields(objectToFieldMap, obj);
         }
         
         for(Schema.SObjectType objType : objectToFieldMap.keySet()) {
-            sObject obj = objType.newSObject();
+            SObject obj = objType.newSObject();
             Schema.DescribeSObjectResult objDescribe = obj.getSObjectType().getDescribe();
             
             if(ProcessType.READ.equals(pType) && !objDescribe.isAccessible()) {
@@ -72,6 +78,8 @@ global with sharing class SecurityEnforcer {
             
             Map<String, Schema.SObjectField> fields = objDescribe.fields.getMap();
             for(String fieldName: objectToFieldMap.get(objType)) {
+                System.debug('[SE] : ' + fieldName);
+                System.debug('[SE] : ' + fields.get(fieldName));
                 //Skip the field if there is no DescribeFieldResult for it
                 if(fields.get(fieldName) == null)
                     continue;
@@ -89,5 +97,42 @@ global with sharing class SecurityEnforcer {
                 }
             }
         }        
+    }
+
+    private static void processSObjectTypeAndFields(Map<Schema.SObjectType, Set<String>> objectToFieldMap, SObject obj) {
+        if(obj == null)
+            return;
+        
+        Schema.SObjectType objType = obj.getSObjectType();
+        if(objectToFieldMap.get(objType) == null)
+            objectToFieldMap.put(objType, new Set<String>());
+        
+        //Get all fields that are populated on this object
+        Map<String, Object> populatedFields = obj.getPopulatedFieldsAsMap();
+
+        for(String fieldName : populatedFields.keySet()) {
+            //Check if field is actually a relationship
+            if(fieldName.endsWith('__r')) {
+                List<SObject> relatedObjects = new List<SObject>();
+
+                try {
+                    //Try to interpret Relationship as Parent first
+                    relatedObjects.add(obj.getSObject(fieldName));
+                }
+                catch(SObjectException ex) {
+                    //It is not Parent relationship, so probably child
+                    relatedObjects = obj.getSObjects(fieldName);
+                }
+
+                //Process all relationship objects
+                for(SObject relObj : relatedObjects) {
+                    processSObjectTypeAndFields(objectToFieldMap, relObj);
+                }
+            }
+            else {
+                //Process standard object field
+                objectToFieldMap.get(objType).add(fieldName);
+            }
+        }
     }
 }
