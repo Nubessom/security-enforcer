@@ -11,9 +11,13 @@ public with sharing class SecurityEnforcerTest {
     
     @isTest 
     public  static void deleteTest_Success() {
+        Set<Id> ids = new Set<Id>();
+        SecurityEnforcer.validateCanDelete(ids);
         List<Account> dummyList = new List<Account>();
         dummyList.add(new Account(Name='test name'));
         SecurityEnforcer.validateCanDelete(dummyList);
+        SecurityEnforcer.createSObject(dummyList);
+        SecurityEnforcer.deleteSObject(dummyList);
         System.assert(true);
     }
         
@@ -44,6 +48,8 @@ public with sharing class SecurityEnforcerTest {
     public static void validateCanUpdateTest_Success() {
         Account dummyAccount =  new Account(Name='test name');
         SecurityEnforcer.validateCanUpdate(dummyAccount);
+        SecurityEnforcer.createSObject(dummyAccount);
+        SecurityEnforcer.updateSObject(dummyAccount);
         System.assert(true);    
     }
     
@@ -51,6 +57,9 @@ public with sharing class SecurityEnforcerTest {
     public static void validateCanDeleteTest_Success() {
         Account dummyAccount =  new Account(Name='test name');
         SecurityEnforcer.validateCanDelete(dummyAccount);
+        SecurityEnforcer.createSObject(dummyAccount);
+        SecurityEnforcer.validateCanDelete(dummyAccount.Id);
+        SecurityEnforcer.deleteSObject(dummyAccount);
         System.assert(true);    
     }
     
@@ -58,6 +67,7 @@ public with sharing class SecurityEnforcerTest {
     public static void validateCanCreateTest_Success() {
         Account dummyAccount =  new Account(Name='test name');
         SecurityEnforcer.validateCanCreate(dummyAccount);
+        SecurityEnforcer.createSObject(dummyAccount);
         System.assert(true);    
     }
     
