@@ -49,6 +49,36 @@ global with sharing class SecurityEnforcer {
         validate(objects, ProcessType.EDIT);
     }
     
+    global static List<SObject> updateSObject(SObject obj) {
+        return updateSObject(new List<SObject>{obj});
+    }
+    
+    global static List<SObject> updateSObject(List<SObject> obj) {
+        validateCanUpdate(obj);
+        update obj;
+        return obj;
+    }
+    
+    global static List<SObject> createSObject(SObject obj) {
+        return createSObject(new List<SObject>{obj});
+    }
+    
+    global static List<SObject> createSObject(List<SObject> obj) {
+        validateCanCreate(obj);
+        insert obj;
+        return obj;
+    }
+    
+    global static void deleteSObject(SObject obj) {
+        validateCanDelete(obj);
+        delete obj;
+    }
+    
+    global static void deleteSObject(List<SObject> obj) {
+        validateCanDelete(obj);
+        delete obj;
+    }
+    
     private static void validate(List<SObject> objects, ProcessType pType) {
         if(objects == null || objects.size() == 0)
             return;

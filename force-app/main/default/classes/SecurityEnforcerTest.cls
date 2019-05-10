@@ -16,6 +16,22 @@ public with sharing class SecurityEnforcerTest {
         SecurityEnforcer.validateCanDelete(dummyList);
         System.assert(true);
     }
+    
+    @isTest 
+    public  static void deleteSObject_Success() {
+        List<Account> dummyList = new List<Account>();
+        dummyList.add(new Account(Name='test name'));
+        SecurityEnforcer.createSObject(dummyList);
+        SecurityEnforcer.deleteSObject(dummyList);
+        System.assert(true);
+    }
+    
+    @isTest 
+    public  static void deleteSetIDsTest_Success() {
+        Set<Id> ids = new Set<Id>();
+        SecurityEnforcer.validateCanDelete(ids);
+        System.assert(true);
+    }
         
     @isTest 
     public  static void updateTest_Success() {
@@ -48,9 +64,33 @@ public with sharing class SecurityEnforcerTest {
     }
     
     @isTest 
+    public static void updateSObjectTest_Success() {
+        Account dummyAccount =  new Account(Name='test name');
+        SecurityEnforcer.createSObject(dummyAccount);
+        SecurityEnforcer.updateSObject(dummyAccount);
+        System.assert(true);    
+    }
+    
+    @isTest 
     public static void validateCanDeleteTest_Success() {
         Account dummyAccount =  new Account(Name='test name');
         SecurityEnforcer.validateCanDelete(dummyAccount);
+        System.assert(true);    
+    }
+    
+    @isTest
+    public static void validateCanDeleteListIDTest_Success() {
+        Account dummyAccount =  new Account(Name='test name');
+        SecurityEnforcer.createSObject(dummyAccount);
+        SecurityEnforcer.validateCanDelete(dummyAccount.Id);
+        System.assert(true);    
+    }
+    
+    @isTest 
+    public static void validateSObjectDeleteTest_Success() {
+        Account dummyAccount =  new Account(Name='test name');
+        SecurityEnforcer.createSObject(dummyAccount);
+        SecurityEnforcer.deleteSObject(dummyAccount);
         System.assert(true);    
     }
     
@@ -58,6 +98,13 @@ public with sharing class SecurityEnforcerTest {
     public static void validateCanCreateTest_Success() {
         Account dummyAccount =  new Account(Name='test name');
         SecurityEnforcer.validateCanCreate(dummyAccount);
+        System.assert(true);    
+    }
+    
+    @isTest 
+    public static void validateSObjectCreateTest_Success() {
+        Account dummyAccount =  new Account(Name='test name');
+        SecurityEnforcer.createSObject(dummyAccount);
         System.assert(true);    
     }
     
