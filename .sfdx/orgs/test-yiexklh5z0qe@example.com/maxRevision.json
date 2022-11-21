@@ -1,12 +1,6 @@
 {
-  "serverMaxRevisionCounter": 10,
+  "serverMaxRevisionCounter": 11,
   "sourceMembers": {
-    "Profile__Admin": {
-      "serverRevisionCounter": 5,
-      "lastRetrievedFromServer": 5,
-      "memberType": "Profile",
-      "isNameObsolete": false
-    },
     "ApexClass__ExceptionTest": {
       "serverRevisionCounter": 6,
       "lastRetrievedFromServer": 6,
@@ -35,6 +29,12 @@
       "serverRevisionCounter": 10,
       "lastRetrievedFromServer": 10,
       "memberType": "ApexClass",
+      "isNameObsolete": false
+    },
+    "Profile__Admin": {
+      "serverRevisionCounter": 11,
+      "lastRetrievedFromServer": 11,
+      "memberType": "Profile",
       "isNameObsolete": false
     }
   }
