@@ -1,0 +1,71 @@
+{
+  "serverMaxRevisionCounter": 17,
+  "sourceMembers": {
+    "ApexClass__ExceptionTest": {
+      "serverRevisionCounter": 6,
+      "lastRetrievedFromServer": 6,
+      "memberType": "ApexClass",
+      "isNameObsolete": false
+    },
+    "ApexClass__FieldAccessException": {
+      "serverRevisionCounter": 7,
+      "lastRetrievedFromServer": 7,
+      "memberType": "ApexClass",
+      "isNameObsolete": false
+    },
+    "ApexClass__ObjectAccessException": {
+      "serverRevisionCounter": 8,
+      "lastRetrievedFromServer": 8,
+      "memberType": "ApexClass",
+      "isNameObsolete": false
+    },
+    "ApexClass__SecurityEnforcer": {
+      "serverRevisionCounter": 9,
+      "lastRetrievedFromServer": 9,
+      "memberType": "ApexClass",
+      "isNameObsolete": false
+    },
+    "ApexClass__SecurityEnforcerTest": {
+      "serverRevisionCounter": 10,
+      "lastRetrievedFromServer": 10,
+      "memberType": "ApexClass",
+      "isNameObsolete": false
+    },
+    "CustomField__Account.Test__c": {
+      "serverRevisionCounter": 12,
+      "lastRetrievedFromServer": 12,
+      "memberType": "CustomField",
+      "isNameObsolete": false
+    },
+    "Profile__Admin": {
+      "serverRevisionCounter": 17,
+      "lastRetrievedFromServer": 17,
+      "memberType": "Profile",
+      "isNameObsolete": false
+    },
+    "Layout__Account-Account (Marketing) Layout": {
+      "serverRevisionCounter": 13,
+      "lastRetrievedFromServer": 13,
+      "memberType": "Layout",
+      "isNameObsolete": false
+    },
+    "Layout__Account-Account (Sales) Layout": {
+      "serverRevisionCounter": 14,
+      "lastRetrievedFromServer": 14,
+      "memberType": "Layout",
+      "isNameObsolete": false
+    },
+    "Layout__Account-Account (Support) Layout": {
+      "serverRevisionCounter": 15,
+      "lastRetrievedFromServer": 15,
+      "memberType": "Layout",
+      "isNameObsolete": false
+    },
+    "Layout__Account-Account Layout": {
+      "serverRevisionCounter": 16,
+      "lastRetrievedFromServer": 16,
+      "memberType": "Layout",
+      "isNameObsolete": false
+    }
+  }
+}
