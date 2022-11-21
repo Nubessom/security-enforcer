@@ -1,0 +1,41 @@
+{
+  "serverMaxRevisionCounter": 10,
+  "sourceMembers": {
+    "Profile__Admin": {
+      "serverRevisionCounter": 5,
+      "lastRetrievedFromServer": 5,
+      "memberType": "Profile",
+      "isNameObsolete": false
+    },
+    "ApexClass__ExceptionTest": {
+      "serverRevisionCounter": 6,
+      "lastRetrievedFromServer": 6,
+      "memberType": "ApexClass",
+      "isNameObsolete": false
+    },
+    "ApexClass__FieldAccessException": {
+      "serverRevisionCounter": 7,
+      "lastRetrievedFromServer": 7,
+      "memberType": "ApexClass",
+      "isNameObsolete": false
+    },
+    "ApexClass__ObjectAccessException": {
+      "serverRevisionCounter": 8,
+      "lastRetrievedFromServer": 8,
+      "memberType": "ApexClass",
+      "isNameObsolete": false
+    },
+    "ApexClass__SecurityEnforcer": {
+      "serverRevisionCounter": 9,
+      "lastRetrievedFromServer": 9,
+      "memberType": "ApexClass",
+      "isNameObsolete": false
+    },
+    "ApexClass__SecurityEnforcerTest": {
+      "serverRevisionCounter": 10,
+      "lastRetrievedFromServer": 10,
+      "memberType": "ApexClass",
+      "isNameObsolete": false
+    }
+  }
+}
